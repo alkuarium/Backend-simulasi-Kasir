@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id_user   Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  alamat    String
+  noTelp    String   @db.VarChar(20)
+  foto      String
+  role      Role     @default(siswa)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pemilik   stan[]
+  transaksi Transaksi[]
+}
+
+enum Role {
+  admin_stan
+  siswa
+  admin
+}
+
+model stan {
+  id_stan      Int      @id @default(autoincrement())
+  id_user_stan Int
+  nama_stan    String
+  nama_pemilik String
+  telp_stan    String   @db.VarChar(20)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  transaksi Transaksi[]
+  menu      menu[]
+
+
+  diskon Diskon[]
+  diskon_menu diskon_menu[]
+  user User @relation(fields: [id_user_stan], references: [id_user])
+}
+
+model menu {
+  id_menu         Int               @id @default(autoincrement())
+  id_menu_stan    Int
+  nama_menu       String
+  harga_menu      Int
+  foto_menu       String
+  jenis_menu      jenis_menu
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  diskon_menu     diskon_menu[]
+  DetailTransaksi DetailTransaksi[]
+  stan            stan              @relation(fields: [id_menu_stan], references: [id_stan])
+}
+
+enum jenis_menu {
+  makanan
+  minuman
+}
+
+model Diskon {
+  id_diskon       Int           @id @default(autoincrement())
+  id_stan        Int
+  nama_diskon     String
+  persen_diskon   Float         @db.Double
+  tanggal_mulai   DateTime
+  tanggal_selesai DateTime
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  diskon_menu     diskon_menu[]
+
+  stan stan @relation(fields: [id_stan], references: [id_stan])
+}
+
+model diskon_menu {
+  id        Int @id @default(autoincrement())
+
+  id_diskon Int
+  id_menu   Int
+  id_stan   Int
+
+  diskon Diskon @relation(fields: [id_diskon], references: [id_diskon])
+  menu   menu   @relation(fields: [id_menu], references: [id_menu])
+  stan   stan   @relation(fields: [id_stan], references: [id_stan])
+
+  @@unique([id_diskon, id_menu])
+}
+
+
+
+model Transaksi {
+  id      Int              @id @default(autoincrement())
+  id_stan Int
+  id_user Int
+  createdAt DateTime         @default(now())
+
+  status  status_transaksi @default(Belum_di_konfirmasi)
+
+  detailTransaksi DetailTransaksi[]
+
+  Stan stan @relation(fields: [id_stan], references: [id_stan])
+  User User @relation(fields: [id_user], references: [id_user])
+}
+
+enum status_transaksi {
+  Belum_di_konfirmasi
+  dimasak
+  diantar
+  sampai
+}
+
+model DetailTransaksi {
+  id           Int      @id @default(autoincrement())
+  id_transaksi Int
+  id_menu      Int
+  qty          Int
+  harga_beli   Float    @db.Double
+  createdAt    DateTime @default(now())
+
+  transaksi Transaksi @relation(fields: [id_transaksi], references: [id])
+  menu      menu      @relation(fields: [id_menu], references: [id_menu])
+}
