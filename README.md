@@ -1,5 +1,5 @@
 # Backend-simulasi-Kasir
-Struktur Backend untuk kasir + pelanggan
+Struktur Backend untuk kasir + pelanggan -- CRUD KASIR DAN PELANGGAN
 
 
 npm init -y untuk memulai projec dan menginstal.
