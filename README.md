@@ -1,6 +1,15 @@
 # Backend-simulasi-Kasir
 Struktur Backend untuk kasir + pelanggan -- CRUD KASIR DAN PELANGGAN
 
+fitur :
+Login
+CRUD Kasir
+CRUD Pelanggan
+AUTH
+
+
+
+
 
 npm init -y untuk memulai projec dan menginstal.
 npm i untuk menginstal semua package yang ada di file package. 
@@ -23,3 +32,6 @@ model user {
 
 lalu di terminal ketik npx prisma migrate dev,
 jika gagal coba ketikan npx prisma generate lalu ulangi printah sebelumnya yaitu npx prisma migrate dev. 
+
+
+
