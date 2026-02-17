@@ -2,9 +2,9 @@
 Struktur Backend untuk kasir + pelanggan -- CRUD KASIR DAN PELANGGAN
 
 fitur :<br>
-Login
-CRUD Kasir
-CRUD Pelanggan
+Login<br>
+CRUD Kasir <br>
+CRUD Pelanggan<br>
 AUTH
 
 
