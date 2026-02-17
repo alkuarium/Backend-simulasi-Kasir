@@ -12,21 +12,21 @@ AUTH
 
 
 npm init -y untuk memulai projec dan menginstal.<br>
-npm i untuk menginstal semua package yang ada di file package. <br>
+npm i untuk menginstal semua package yang ada di file package.<br>
 npm i //package yang ingin di tambahkan / di install.<br>
 npx prisma init ==> untuk menginisialisasikan Prisma ORM.<br>
 Perintah ini membuat folder prisma baru berisi file schema.prisma,<br>
-dan file .env untuk menyimpan URL koneksi database. <br>
+dan file .env untuk menyimpan URL koneksi database.<br>
 
 
-jika ingin menambahkan tabel di database <br>
-ke file schema.prisma <== file ini wajib ada di dalam file prisma saat <br>
+jika ingin menambahkan tabel di database<br>
+ke file schema.prisma <== file ini wajib ada di dalam file prisma saat<br>
 prisma<br>
 |--schema.prisma<br>
 <br>
 lalu untuk menambahkan struktur tabel dalam prisma<br>
 <br>
-model user {<br>
+model user <br>{<br>
 //tabel yang ingin di tambahkan dalam user<br>
 }<br>
 <br>
