@@ -1,7 +1,7 @@
 # Backend-simulasi-Kasir
 Struktur Backend untuk kasir + pelanggan -- CRUD KASIR DAN PELANGGAN
 
-fitur :
+fitur :<br>
 Login
 CRUD Kasir
 CRUD Pelanggan
